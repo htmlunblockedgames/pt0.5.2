@@ -16122,7 +16122,11 @@
             (e[(e.MusicVolume = 16)] = "MusicVolume"),
             (e[(e.CheckpointVolume = 17)] = "CheckpointVolume"),
             (e[(e.VibrationEnabled = 18)] = "VibrationEnabled"),
-            (e[(e.TouchSteeringSide = 19)] = "TouchSteeringSide"));
+            (e[(e.TouchSteeringSide = 19)] = "TouchSteeringSide"),
+            (e[(e.HuSplitsSize = 20)] = "HuSplitsSize"),
+            (e[(e.HuSplitsHeight = 21)] = "HuSplitsHeight"),
+            (e[(e.HuSplitsOpacity = 22)] = "HuSplitsOpacity"),
+            (e[(e.HuSplitsShowSpeed = 23)] = "HuSplitsShowSpeed"));
         })($o || ($o = {})));
       const el = $o;
       var tl,
@@ -49822,6 +49826,120 @@
                   n,
                 );
               }
+              if (null != wR(this, zI, "f")) {
+                const n = wR(this, qI, "f").getTime();
+                let i = null;
+                null != t &&
+                  t.checkpoints.length > e &&
+                  (i = t.checkpoints[e]);
+                if (null != n && null != i && null != i.time) {
+                  const r = i.time.time - n.time;
+                  const a =
+                    wR(this, qI, "f").getSpeedKmh() -
+                    (null != i.speedKmh
+                      ? i.speedKmh
+                      : null != t && null != t.car
+                        ? t.car.getSpeedKmh()
+                        : 0);
+                  const s = document.getElementById("ui");
+                  if (null != s) {
+                    const o = wR(this, kI, "f"),
+                      l = o.getSettingFloat(el.HuSplitsSize),
+                      c = o.getSettingFloat(el.HuSplitsHeight),
+                      h = o.getSettingFloat(el.HuSplitsOpacity),
+                      d = o.getSettingBoolean(el.HuSplitsShowSpeed),
+                      u = document.createElement("div");
+                    (u.style = `
+                position: fixed;
+                top: ${100 * c}%;
+                left: 50%;
+                opacity: ${h};
+                transform: translateX(-50%);
+                font-family: ForcedSquare;
+                font-style: normal;
+                font-size: ${4 * l}rem;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+                user-select: none;
+                pointer-events: none;
+                z-index: 9999;
+                `);
+                    const p = document.createElement("div");
+                    p.style = "display: flex;";
+                    const f = document.createElement("div");
+                    (f.style = `
+                padding: 4px 8px;
+                text-align: center;
+                flex: 1;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                `);
+                    const m = document.createElement("div");
+                    (m.style = `
+                padding: 4px 8px;
+                text-align: center;
+                flex: 1;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                `);
+                    const g = document.createElement("div");
+                    g.style = "display: flex;";
+                    const v = document.createElement("div");
+                    (v.style = `
+                padding: 4px 8px;
+                text-align: center;
+                flex: 1;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                `);
+                    const w = document.createElement("div");
+                    (w.style = `
+                display: flex;
+                justify-content: left;
+                `);
+                    w.innerHTML = `
+                <p style="
+                    margin: 0;
+                    padding: 4px 8px;
+                    font-weight: bold;
+                    background-color:${r <= 0 ? "#f55" : "#334bffcc"};
+                    text-align: center;
+                ">
+                    ${r <= 0 ? "+" : ""}${(-r).toFixed(3)}
+                </p>
+                `;
+                    f.innerHTML = `${wR(this, qI, "f").getSpeedKmh().toFixed(1)}`;
+                    m.innerHTML = `
+                <p style="
+                    margin: 0;
+                    font-weight: bold;
+                    color: ${a < 0 ? "#f55" : 0 === a ? "#808080" : "#5f5"};
+                ">
+                    ${a <= 0 ? "" : "+"}${a.toFixed(1)}
+                </p>
+                `;
+                    v.innerHTML = `${Jk.formatTimeString(n, !1)}`;
+                    (p.appendChild(f),
+                      p.appendChild(m),
+                      g.appendChild(v),
+                      d && u.appendChild(p),
+                      u.appendChild(g),
+                      u.appendChild(w),
+                      s.appendChild(u),
+                      setTimeout(() => {
+                        u.remove();
+                      }, 2000));
+                  }
+                }
+              }
             }),
             wR(this, qI, "f").addFinishCallback((e) => {
               var t, n;
@@ -51163,6 +51281,19 @@
                 { title: AL(this, eL, "f").get("Top"), value: "top" },
               ],
               el.Speedometer,
+            ),
+            AL(this, JR, "m", mL).call(this, "Heads Up Splits"),
+            AL(this, JR, "m", wL).call(this, "Size", el.HuSplitsSize),
+            AL(this, JR, "m", wL).call(this, "Height", el.HuSplitsHeight),
+            AL(this, JR, "m", wL).call(this, "Opacity", el.HuSplitsOpacity),
+            AL(this, JR, "m", vL).call(
+              this,
+              "Show Speed Split",
+              [
+                { title: AL(this, eL, "f").get("Off"), value: "false" },
+                { title: AL(this, eL, "f").get("On"), value: "true" },
+              ],
+              el.HuSplitsShowSpeed,
             ),
             AL(this, JR, "m", gL).call(this, AL(this, eL, "f").get("Mobile")),
             AL(this, JR, "m", vL).call(
@@ -57569,6 +57700,10 @@
             [el.CheckpointVolume, "1"],
             [el.VibrationEnabled, "false"],
             [el.TouchSteeringSide, "true"],
+            [el.HuSplitsSize, "0.5"],
+            [el.HuSplitsHeight, "0.1"],
+            [el.HuSplitsOpacity, "1"],
+            [el.HuSplitsShowSpeed, "true"],
           ]);
         }
         defaultKeyBindings() {
