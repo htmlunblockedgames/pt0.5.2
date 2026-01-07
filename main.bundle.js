@@ -54647,6 +54647,12 @@
                 "sandline_ultimatum.track",
                 "snow_park.track",
                 "winter_hollow.track",
+                "Nurenburgring_GP.track",
+                "alpine_descent.track",
+                "japan.track",
+                "natures_sanctuary.track",
+                "oxygen_not_included.track",
+                "pavlova_dip.track",
               ].map((t) => UB(this, SB, "m", RB).call(this, t, e)),
             )
               .then((e) => {
