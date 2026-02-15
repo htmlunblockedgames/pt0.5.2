@@ -53693,11 +53693,17 @@
         (gN = function (e) {
           kN(this, JD, "f").innerHTML = "";
           const t = document.createElement("a");
-          ((t.href = "https://opengameart.org/content/sci-fi-theme-1"),
+          ((t.href = "https://sites.google.com/view/poly-track-backup/poly-track-0-6-0"),
             (t.target = "_blank"),
-            (t.textContent =
-              'OpenGameArt.org "Sci-fi Theme" by Maou (CC-BY 4.0)'),
+            (t.rel = "noopener noreferrer"),
+            (t.textContent = "Poly Track v0.6.0 has been released! It has multiplayer along with a bunch of other features!"),
             kN(this, JD, "f").appendChild(t));
+          const n = document.createElement("a");
+          ((n.href = "https://opengameart.org/content/sci-fi-theme-1"),
+            (n.target = "_blank"),
+            (n.textContent =
+              'OpenGameArt.org "Sci-fi Theme" by Maou (CC-BY 4.0)'),
+            kN(this, JD, "f").appendChild(n));
         }),
         (vN = function () {
           var e;
