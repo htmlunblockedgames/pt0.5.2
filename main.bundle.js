@@ -53693,7 +53693,7 @@
         (gN = function (e) {
           kN(this, JD, "f").innerHTML = "";
           const t = document.createElement("a");
-          ((t.href = "https://sites.google.com/view/poly-track-backup/poly-track-0-6-0"),
+          ((t.href = "https://sites.google.com/view/newcargame/poly-track-0-6-0"),
             (t.target = "_blank"),
             (t.rel = "noopener noreferrer"),
             (t.textContent = "Poly Track v0.6.0 has been released! It has multiplayer along with a bunch of other features!"),
